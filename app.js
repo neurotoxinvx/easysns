@@ -1,3 +1,9 @@
+/*
+** @author: Lin Gui
+** @desc: 桂林的实现方式
+** @data: 2016.09.03
+*/
+
 var http = require('http')
 var parseUrl = require('url').parse
 var port = process.env.PORT || 3000;
@@ -30,9 +36,9 @@ const rules = [
 
 /*match router rules*/
 function find (ary, match) {
-	for(var i = 0; i < ary.length; i++) {
-		if(match(ary[i])) return ary[i]
-	}
+  for(var i = 0; i < ary.length; i++) {
+    if(match(ary[i])) return ary[i]
+  }
 }
 
 /*server*/
