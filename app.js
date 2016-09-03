@@ -18,8 +18,14 @@ function notFoundController (req, res) {
 
 /*router rules*/
 const rules = [
-  { path: '/', controller: homeController },
-  { path: '/user', controller: userController }
+  {
+  	path: '/',
+  	controller: homeController
+  },
+  {
+  	path: '/user',
+  	controller: userController
+  }
 ]
 
 /*match router rules*/
