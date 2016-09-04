@@ -1,9 +1,3 @@
-/*
-** @author: Lin Gui
-** @desc: 桂林的实现方式
-** @data: 2016.09.03
-*/
-
 var http = require('http')
 var parseUrl = require('url').parse
 var port = process.env.PORT || 3000;
