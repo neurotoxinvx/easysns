@@ -1,7 +1,7 @@
 var http = require('http')
 var controllers = require('./controllers')
 var parseUrl = require('url').parse
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 8080;
 
 function notFoundController (req, res) {
   res.writeHead(404)
@@ -37,11 +37,15 @@ var server = http.createServer(function(req, res){
 
   var rule = find(rules, function(rule){
     if(rule.path instanceof RegExp){
-      return urlInfo.pathname.match(rule.path)
+      var matchResult = urlInfo.pathname.match(rule.path)
+      if(matchResult){
+        req.params = matchResult  
+      }
+      return matchResult
     }
   	return rule.path == urlInfo.pathname
   })
-  var controller = rule && rule.controller(req, res) || notFoundController
+  var controller = rule && rule.controller || notFoundController
   controller(req, res)
 })
 
