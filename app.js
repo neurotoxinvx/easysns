@@ -11,6 +11,10 @@ function notFoundController (req, res) {
 /*router rules*/
 const rules = [
   {
+    path: '/play',
+    controller: controllers.play
+  },
+  {
   	path: '/',
   	controller: controllers.home
   },
