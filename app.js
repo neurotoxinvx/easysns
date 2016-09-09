@@ -2,6 +2,7 @@ var http = require('http')
 var controllers = require('./controllers')
 var parseUrl = require('url').parse
 var port = process.env.PORT || 8080;
+const authorize = require('./middlewares/authorize')
 
 function notFoundController (req, res) {
   res.writeHead(404)
@@ -20,7 +21,11 @@ const rules = [
   },
   {
   	path: '/user',
-  	controller: controllers.user
+  	controller: controllers.user.user
+  },
+  {
+    path: '/my/avatar',
+    controller: controllers.user.myavatar
   },
   {
     path: '/auth/register',
@@ -35,6 +40,10 @@ const rules = [
   {
     path: /^\/static(\/.*)/,
     controller: controllers.static
+  },
+  {
+    path: /^\/upload(\/.*)/,
+    controller: controllers.static.upload
   }
 ]
 
@@ -64,6 +73,7 @@ var server = http.createServer(function(req, res){
   	return rule.path == urlInfo.pathname
   })
   var controller = rule && rule.controller || notFoundController
+  controller = authorize(controller)
   controller(req, res)
 })
 
